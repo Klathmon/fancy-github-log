@@ -7,8 +7,10 @@ import styles from './styles.module.css'
 
 const options = {
   layout: {
-    hierarchical: true,
-    direction: 'LR'
+    hierarchical: {
+      enabled: true,
+      direction: 'LR'
+    }
   }
 }
 
@@ -20,7 +22,7 @@ export default class Graph extends Component {
     return {
       nodes: commits.map(({ sha }) => ({ id: sha, label: `${sha.substr(0, 5)}...` })),
       edges: commits.reduce((edges, { sha: child, parents }) => {
-        for (let parent in parents) {
+        for (let parent of parents) {
           edges.push({
             from: parent,
             to: child
@@ -36,6 +38,7 @@ export default class Graph extends Component {
         <GraphVis
           graph={this.buildGraph(this.props.commits)}
           options={options}
+          style={{ height: '600px' }} // The lib doesn't support className!?
         />
       </div>
     )

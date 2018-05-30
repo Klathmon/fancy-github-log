@@ -5,6 +5,7 @@ import './App.css'
 import getCommits from './helpers/getCommits'
 
 import RepoInput from './components/RepoInput'
+import Graph from './components/Graph'
 
 class App extends Component {
   state = {
@@ -24,6 +25,7 @@ class App extends Component {
           <h1 className='App-title'>Welcome to React</h1>
         </header>
         <RepoInput onSet={this.repoSet} />
+        <Graph commits={this.state.commits} />
       </div>
     )
   }
