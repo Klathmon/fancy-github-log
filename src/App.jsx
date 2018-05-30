@@ -21,7 +21,8 @@ class App extends Component {
       <div className='App'>
         <header className='App-header'>
           <img src={logo} className='App-logo' alt='logo' />
-          <h1 className='App-title'>Welcome to React</h1>
+          <h1 className='App-title'>Fancy Github Log</h1>
+          <p>Yeah... I was really too lazy to change the default header...</p>
         </header>
         <RepoInput onSet={this.repoSet} />
         <Graph commits={this.state.commits} />

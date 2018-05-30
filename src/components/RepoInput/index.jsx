@@ -28,7 +28,7 @@ export default class RepoInput extends Component {
             className={styles.input}
             value={this.state.repo}
             onChange={this.onChangeInput}
-            label='torvalds/linux'
+            label='username/repository'
           />
           <Button variant='raised' className={styles.button} onClick={this.onSubmit}>
             Submit

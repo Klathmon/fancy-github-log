@@ -1,0 +1,16 @@
+.container {
+  padding: 20px;
+}
+
+/*
+  specificity is a problem...
+  this is *a* solution...
+  Until I get around to understanding how MaterialUI does their styling, this will have to work
+ */
+.button.button.button {
+  margin: 15px;
+}
+
+.input.input.input {
+  width: 300px;
+}
