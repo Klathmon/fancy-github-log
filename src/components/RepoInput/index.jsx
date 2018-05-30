@@ -8,7 +8,7 @@ import styles from './styles.module.css'
 
 export default class RepoInput extends Component {
   static propTypes = {
-    onSet: PropTypes.function // called when the repo is set
+    onSet: PropTypes.func // called when the repo is set
   }
   state = {
     repo: ''
