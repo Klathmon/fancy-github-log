@@ -18,7 +18,7 @@ export default class RepoInput extends Component {
   }
   onSubmit = (event) => {
     event.preventDefault()
-    this.onSet(this.state.repo)
+    this.props.onSet(this.state.repo)
   }
   render () {
     return (
