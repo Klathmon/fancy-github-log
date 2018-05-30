@@ -17,7 +17,6 @@ class App extends Component {
     })
   }
   render () {
-    console.log(this.state.commits)
     return (
       <div className='App'>
         <header className='App-header'>
