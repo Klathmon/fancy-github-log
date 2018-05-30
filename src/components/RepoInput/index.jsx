@@ -11,7 +11,7 @@ export default class RepoInput extends Component {
     onSet: PropTypes.func // called when the repo is set
   }
   state = {
-    repo: ''
+    repo: 'Klathmon/imagemin-webpack-plugin'
   }
   onChangeInput = ({ target: { value } }) => {
     this.setState({ repo: value })
