@@ -9,7 +9,7 @@ const options = {
   layout: {
     hierarchical: {
       enabled: true,
-      direction: 'LR'
+      direction: 'RL'
     }
   }
 }
@@ -20,17 +20,26 @@ export default class Graph extends Component {
   }
   buildGraph = (commits) => {
     return {
-      nodes: commits.map(({ sha }) => ({ id: sha, label: `${sha.substr(0, 5)}...` })),
-      edges: commits.reduce((edges, { sha: child, parents }) => {
-        for (let parent of parents) {
+      nodes: Object.values(commits).map(({ sha, commit: { message } }, index) => {
+        return {
+          id: sha,
+          label: `${message.substr(0, 5)}...`,
+          title: message
+        }
+      }),
+      edges: Object.values(commits).reduce((edges, { sha: childSha, parents }) => {
+        for (let { sha: parentSha } of parents) {
           edges.push({
-            from: parent,
-            to: child
+            from: parentSha,
+            to: childSha
           })
         }
         return edges
       }, [])
     }
+  }
+  onNodeSelect = ({ nodes }) => {
+    console.log(nodes)
   }
   render () {
     return (
@@ -39,6 +48,7 @@ export default class Graph extends Component {
           graph={this.buildGraph(this.props.commits)}
           options={options}
           style={{ height: '600px' }} // The lib doesn't support className!?
+          events={{ select: this.onNodeSelect }}
         />
       </div>
     )
