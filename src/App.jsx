@@ -1,15 +1,22 @@
 import React, { Component } from 'react'
 import logo from './logo.svg'
 import './App.css'
+
+import getCommits from './helpers/getCommits'
+
 import RepoInput from './components/RepoInput'
+
 class App extends Component {
   state = {
-    repo: undefined
+    commits: []
   }
-  repoSet = (repo) => {
-    this.setState({ repo })
+  repoSet = async (repo) => {
+    this.setState({
+      commits: await getCommits(repo)
+    })
   }
   render () {
+    console.log(this.state.commits)
     return (
       <div className='App'>
         <header className='App-header'>
