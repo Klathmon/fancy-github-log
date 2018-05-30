@@ -9,7 +9,7 @@ import Graph from './components/Graph'
 
 class App extends Component {
   state = {
-    commits: []
+    commits: {}
   }
   repoSet = async (repo) => {
     this.setState({

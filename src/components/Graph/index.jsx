@@ -5,26 +5,30 @@ import GraphVis from 'react-graph-vis'
 
 import styles from './styles.module.css'
 
+const LABEL_SIZE = 30
 const options = {
   layout: {
     hierarchical: {
       enabled: true,
-      direction: 'RL'
+      direction: 'LR',
+      sortMethod: 'directed',
+      parentCentralization: false,
+      edgeMinimization: false
     }
   }
 }
 
 export default class Graph extends Component {
   static propTypes = {
-    commits: PropTypes.arrayOf(PropTypes.object)
+    commits: PropTypes.object
   }
   buildGraph = (commits) => {
     return {
       nodes: Object.values(commits).map(({ sha, commit: { message } }, index) => {
+        const label = (message.length > LABEL_SIZE ? `${message.substr(0, LABEL_SIZE - 3)}...` : message)
         return {
           id: sha,
-          label: `${message.substr(0, 5)}...`,
-          title: message
+          label
         }
       }),
       edges: Object.values(commits).reduce((edges, { sha: childSha, parents }) => {
@@ -39,7 +43,9 @@ export default class Graph extends Component {
     }
   }
   onNodeSelect = ({ nodes }) => {
-    console.log(nodes)
+    if (nodes.length === 1) { // do nothing if we select more or less than 1 node
+      window.open(this.props.commits[nodes[0]].html_url, '_blank')
+    }
   }
   render () {
     return (
